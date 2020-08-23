@@ -7,20 +7,19 @@ import (
 
 func maximumSwap(num int) int {
 	numBytes := []byte(strconv.Itoa(num))
-	data := make(map[int]int)
+	data := []int{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
 	for i, numByte := range numBytes {
 		t := int(numByte - '0')
 		data[t] = i
 	}
 
 	for ii, numB := range numBytes {
-		for j := 9; j > int(numB-'0'); j-- {
-			if index, ok := data[j]; ok {
-				if index > ii {
-					numBytes[ii], numBytes[index] = numBytes[index], numBytes[ii]
-					q, _ := strconv.Atoi(string(numBytes))
-					return q
-				}
+		now := int(numB - '0')
+		for j := 9; j > now; j-- {
+			if data[j] > ii {
+				numBytes[ii], numBytes[data[j]] = numBytes[data[j]], numBytes[ii]
+				q, _ := strconv.Atoi(string(numBytes))
+				return q
 			}
 		}
 	}
