@@ -7,7 +7,7 @@ import (
 
 func maxProfit(prices []int) int {
 	dp_i_0 := 0
-	dp_i_1 := math.MinInt8
+	dp_i_1 := math.MinInt64
 	for _, p := range prices {
 		dp_i_0 = max(dp_i_0, dp_i_1+p)
 		dp_i_1 = max(dp_i_1, -p)
