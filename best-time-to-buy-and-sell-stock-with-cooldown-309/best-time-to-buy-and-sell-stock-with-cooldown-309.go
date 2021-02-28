@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func maxProfit(prices []int) int {
 	n := len(prices)
@@ -24,6 +27,23 @@ func maxProfit(prices []int) int {
 	return dp[n-1][0]
 }
 
+func maxProfit2(prices []int) int {
+	n := len(prices)
+	if n < 2 {
+		return 0
+	}
+	dpI0 := 0
+	dpI1 := math.MinInt64
+	dpPre := 0 //前一天
+	for _, p := range prices {
+		temp := dpI0
+		dpI0 = max(dpI0, dpI1+p)
+		dpI1 = max(dpI1, dpPre-p)
+		dpPre = temp
+	}
+	return dpI0
+}
+
 func max(a int, b int) int {
 	if a > b {
 		return a
@@ -31,5 +51,5 @@ func max(a int, b int) int {
 	return b
 }
 func main() {
-	fmt.Println(maxProfit([]int{1, 2, 3, 0, 2}))
+	fmt.Println(maxProfit2([]int{1, 2, 3, 0, 2}))
 }
