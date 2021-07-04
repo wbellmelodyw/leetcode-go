@@ -24,6 +24,34 @@ func max(a int, b int) int {
 	}
 	return b
 }
+
+//
+type student struct {
+	Name string
+	Age  int
+}
+
+func p() map[string]*student {
+	m := make(map[string]*student)
+	stus := []student{
+		{Name: "z", Age: 1},
+		{Name: "a", Age: 2},
+		{Name: "b", Age: 3},
+	}
+
+	for _, stu := range stus {
+		m[stu.Name] = &stu
+	}
+	return m
+}
 func main() {
-	fmt.Println(maxProfit([]int{1, 3, 2, 8, 4, 9}, 2))
+	//var a uint = 1
+	//var b uint = 2
+	//fmt.Println(a-b)
+	//fmt.Println(uint(math.MaxUint64))//18446744073709551615
+	//fmt.Println(maxProfit([]int{1, 3, 2, 8, 4, 9}, 2))
+	a := p()
+	for k, v := range a {
+		fmt.Printf("key=%s,value=%v \n", k, v)
+	}
 }
